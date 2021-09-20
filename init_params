@@ -1,0 +1,11 @@
+#!/bin/bash
+
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+
+for PARAM in $(cat $WRDIR/etc/dt-auto-backup.conf)
+ do
+ declare `echo $PARAM| awk -F "=" '{print $1}'`=`echo $PARAM| awk -F "=" '{print $2}'`
+ done
+
+[ "$BACKUPDIR" = "" ]&& BACKUPDIR=$WRDIR/backup

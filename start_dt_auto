@@ -1,0 +1,20 @@
+#!/bin/bash 
+
+SAVEDIR=$PWD
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+cd $WRDIR
+. $WRDIR/init_params
+
+./clean_dt_auto_backup
+
+for COMP in $($PWD/dock_get_loc_net)
+do
+
+ if  ! [ "$COMP" = "NO-NAME-COMP-QWERTY" ]; then
+        echo We start $COMP
+	./dock_dt-bckp-ip $COMP
+ fi
+
+done
+cd $SAVEDIR

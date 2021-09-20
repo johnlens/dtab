@@ -1,0 +1,24 @@
+#!/bin/bash
+
+SAVEDIR=$PWD
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+
+. $WRDIR/init_params
+
+cd $WRDIR
+./install_dock_cnts8
+
+docker  pull $DOCK_IMAGE
+
+
+test -e /etc/cron.hourly/$BASE'_'start_dt_auto&&rm -f /etc/cron.hourly/$BASE'_'start_dt_auto
+test -e /etc/cron.hourly/&&ln -s  $WRDIR/start_dt_auto /etc/cron.hourly/$BASE'_'start_dt_auto
+
+mkdir -p  backup
+mkdir -p  reports
+mkdir -p  log
+mkdir -p  run
+
+
+cd $SAVEDIR

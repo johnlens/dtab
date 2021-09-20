@@ -1,0 +1,17 @@
+#!/bin/bash
+
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+DT_LOCATION=$WRDIR
+
+. $WRDIR/init_params
+
+
+docker run -ti \
+-v $DT_LOCATION/etc/dt-auto-backup.conf:/dt-auto-backup/etc/dt-auto-backup.conf \
+-v $BACKUPDIR:/dt-auto-backup/backup \
+-v $DT_LOCATION/run:/dt-auto-backup/run \
+-v $DT_LOCATION/log:/dt-auto-backup/log \
+-v $DT_LOCATION/reports:/dt-auto-backup/reports \
+$DOCK_IMAGE  
+

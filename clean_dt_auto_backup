@@ -1,0 +1,8 @@
+#!/bin/bash
+
+. $WRDIR/init_params
+
+for CONTAINER in $(docker ps -a   |grep "$DOCK_IMAGE" |awk '{print $1}')
+do
+docker rm $CONTAINER
+done
