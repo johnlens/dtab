@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SAVEDIR=$PWD
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+cd $WRDIR
+. $WRDIR/init_params
+echo $BASE
+yum install -y yum-utils
+
+yum-config-manager \
+--add-repo \
+https://download.docker.com/linux/centos/docker-ce.repo
+
+ 
+yum install -y  docker-ce 
+yum install -y  docker-ce-cli 
+yum install -y  containerd.io
+
+cd $SAVEDIR
