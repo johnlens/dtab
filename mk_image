@@ -1,0 +1,6 @@
+#!/bin/bash
+
+WRDIR=$PWD
+cd src
+tar -cv dt* |gzip >../test.tar.gz
+cd $WRDIR
