@@ -1,6 +1,20 @@
 #!/bin/bash
 
-WRDIR=$PWD
-cd src
-tar -cv dt* |gzip >../test.tar.gz
+
+
+CURRDIR=$PWD
+
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+
 cd $WRDIR
+. ./init_params
+cd src
+rm -f ../dock_file/dt-auto-backup.tar.gz
+tar -cv ./dt* |gzip >../dock_file/dt-auto-backup.tar.gz
+cd ../dock_file
+
+docker build  . -t $DOCK_IMAGE
+docker push $DOCK_IMAGE
+
+cd $CURDIR
