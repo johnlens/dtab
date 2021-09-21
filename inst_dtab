@@ -17,6 +17,7 @@ echo DOMAIN= >>$CONFFILE
 echo BASE=dt-auto-backup>>$CONFFILE
 echo DOCK_IMAGE=dtcentos/smbenv:solid>>$CONFFILE
 echo BACKUPDIR=>>$CONFFILE
+echo DELAY=1>>$CONFFILE
 echo >>$CONFFILE
 fi 
 
