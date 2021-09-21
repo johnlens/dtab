@@ -1,5 +1,5 @@
 #!/bin/bash
 
 #git stash
-#git clone https://github.com/johnlens/dtab.gi
+#git clone https://github.com/johnlens/dtab.git
 git pull https://github.com/johnlens/dtab.git

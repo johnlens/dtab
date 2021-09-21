@@ -4,13 +4,27 @@ SAVEDIR=$PWD
 AFLNM=`readlink -e "$0"`
 WRDIR=`dirname "$AFLNM"`
 
-. $WRDIR/init_params
 
 cd $WRDIR
+
+CONFFILE=etc/dt-auto-backup.conf
+mkdir -p etc
+
+if [ $CONFFILE ];  then
+echo USER= >$CONFFILE
+echo PASS= >>$CONFFILE
+echo DOMAIN= >>$CONFFILE
+echo BASE=dt-auto-backup>>$CONFFILE
+echo DOCK_IMAGE=dtcentos/smbenv:solid>>$CONFFILE
+echo BACKUPDIR=>>$CONFFILE
+echo >>$CONFFILE
+fi 
+
+. $WRDIR/init_params
+
 ./install_dock_cnts8
 
 docker  pull $DOCK_IMAGE
-
 
 test -e /etc/cron.hourly/$BASE'_'start_dt_auto&&rm -f /etc/cron.hourly/$BASE'_'start_dt_auto
 test -e /etc/cron.hourly/&&ln -s  $WRDIR/start_dt_auto /etc/cron.hourly/$BASE'_'start_dt_auto
