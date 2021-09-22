@@ -23,8 +23,6 @@ fi
 
 . $WRDIR/init_params
 
-./install_dock_cnts8
-
 docker  pull $DOCK_IMAGE
 
 test -e /etc/cron.hourly/$BASE'_'start_dt_auto&&rm -f /etc/cron.hourly/$BASE'_'start_dt_auto
