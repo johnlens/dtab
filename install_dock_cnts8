@@ -18,7 +18,7 @@ yum install -y  docker-ce-cli
 yum install -y  containerd.io
 
 chkconfig docker on
-service doker start
+service docker start
 
 chmod -x $AFLNM
 cd $SAVEDIR
