@@ -2,3 +2,4 @@
 
 git stash
 git pull https://github.com/johnlens/dtab.git
+chmod +x $0
