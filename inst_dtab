@@ -32,6 +32,6 @@ mkdir -p  backup
 mkdir -p  reports
 mkdir -p  log
 mkdir -p  run
-
+chmod +x update_myself
 
 cd $SAVEDIR
