@@ -10,7 +10,7 @@ cd $WRDIR
 CONFFILE=etc/dt-auto-backup.conf
 mkdir -p etc
 
-if ! [ $CONFFILE ];  then
+if  [ ! -f  $CONFFILE ];  then
 echo USER= >$CONFFILE
 echo PASS= >>$CONFFILE
 echo DOMAIN= >>$CONFFILE
