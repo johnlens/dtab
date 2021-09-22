@@ -21,6 +21,10 @@ echo DELAY=1>>$CONFFILE
 echo >>$CONFFILE
 fi 
 
+cp pf-dt etc/pf-dt
+cp exc-dt etc/exc-dt
+
+
 . $WRDIR/init_params
 
 docker  pull $DOCK_IMAGE

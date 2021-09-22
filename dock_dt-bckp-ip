@@ -14,6 +14,7 @@ docker run -d \
 -v $DT_LOCATION/run:/dt-auto-backup/run \
 -v $DT_LOCATION/log:/dt-auto-backup/log \
 -v $DT_LOCATION/reports:/dt-auto-backup/reports \
+$PRM_SGN \
 --cap-add SYS_ADMIN \
 --cap-add DAC_READ_SEARCH \
 $DOCK_IMAGE /dt-auto-backup/dt-bckp-ip $1

@@ -9,3 +9,8 @@ for PARAM in $(cat $WRDIR/etc/dt-auto-backup.conf)
  done
 
 [ "$BACKUPDIR" = "" ]&& BACKUPDIR=$WRDIR/backup
+
+PRM_PF_SGN="-v $DT_LOCATION/etc/pf-dt:/dt-auto-backup/pf-dt"
+PRM_EXC_SGN="-v $DT_LOCATION/etc/exc-dt:/dt-auto-backup/exc-dt"
+[ -e etc/pf-dt ]&&PRM_SGN="$PRM_SGN $PRM_PF_SGN"
+[ -e etc/exc-dt ]&&PRM_SGN="$PRM_SGN $PRM_EXC_SGN"
