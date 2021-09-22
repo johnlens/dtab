@@ -5,12 +5,16 @@ AFLNM=`readlink -e "$0"`
 WRDIR=`dirname "$AFLNM"`
 cd $WRDIR
 
+. ./init_params
+
+
 git stash
 git pull https://github.com/johnlens/dtab.git
 chmod +x $0
 rm -f pf-dt
 rm -f exc-dt
 
+docker pull $DOCK_IMAGE
 cd $SAVEDIR
 
 #endfile
