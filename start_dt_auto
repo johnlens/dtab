@@ -9,7 +9,6 @@ docker pull $DOCK_IMAGE
 
 cd $WRDIR
 . $WRDIR/init_params
-
 ./clean_dt_auto_backup
 
 for COMP in $($PWD/dock_get_loc_net)
