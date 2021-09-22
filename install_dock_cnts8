@@ -16,5 +16,9 @@ https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y  docker-ce 
 yum install -y  docker-ce-cli 
 yum install -y  containerd.io
+
+chkconfig docker on
+service doker start
+
 chmod -x $AFLNM
 cd $SAVEDIR
