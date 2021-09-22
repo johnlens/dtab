@@ -4,6 +4,7 @@ SAVEDIR=$PWD
 AFLNM=`readlink -e "$0"`
 WRDIR=`dirname "$AFLNM"`
 
+
 docker pull $DOCK_IMAGE
 
 cd $WRDIR
