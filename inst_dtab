@@ -30,8 +30,8 @@ test -e /etc/cron.hourly/&&ln -s  $WRDIR/start_dt_auto /etc/cron.hourly/$BASE'_'
 
 
 UPDATE_MYSELF=update_myself
-test -e /etc/cron.daily/$BASE'_'$UPDATE_MYSELF&&rm -f /etc/cron.hourly/$BASE'_'$UPDATE_MYSELF
-test -e /etc/cron.daily/&&ln -s  $WRDIR/$UPDATE_MYSELF /etc/cron.hourly/$BASE'_'$UPDATE_MYSELF
+test -e /etc/cron.daily/$BASE'_'$UPDATE_MYSELF&&rm -f /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
+test -e /etc/cron.daily/&&ln -s  $WRDIR/$UPDATE_MYSELF /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
 
 
 mkdir -p  backup
