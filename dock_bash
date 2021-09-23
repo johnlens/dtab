@@ -7,7 +7,7 @@ DT_LOCATION=$WRDIR
 . $WRDIR/init_params
 
 
-docker run -ti \
+docker run -ti\
 -v $DT_LOCATION/etc/dt-auto-backup.conf:/dt-auto-backup/etc/dt-auto-backup.conf \
 -v $BACKUPDIR:/dt-auto-backup/backup \
 -v $DT_LOCATION/run:/dt-auto-backup/run \
@@ -16,5 +16,6 @@ docker run -ti \
 --cap-add SYS_ADMIN \
 --cap-add DAC_READ_SEARCH \
 $PRM_SGN \
-$DOCK_IMAGE  
+$DOCK_IMAGE  \
+
 

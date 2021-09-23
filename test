@@ -2,6 +2,11 @@
 
 
 
+[ ! "s1" = "1" ]&& echo aaa
+
+exit
+
+
 . ./init_params
 
 

@@ -1,6 +1,16 @@
 #!/bin/bash
 
-. $WRDIR/init_params
+
+SAVEDIR=$PWD
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+
+
+#docker pull $DOCK_IMAGE
+
+cd $WRDIR
+
+. ./init_params
 
 
 for CONTAINER in $(docker ps -a   |grep "$DOCK_IMAGE" |awk '{print $1}')
@@ -8,3 +18,5 @@ do
 docker stop   $CONTAINER
 docker rm $CONTAINER
 done
+rm -f run/*.lock
+ 
