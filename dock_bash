@@ -16,6 +16,6 @@ docker run -ti\
 --cap-add SYS_ADMIN \
 --cap-add DAC_READ_SEARCH \
 $PRM_SGN \
-$DOCK_IMAGE  \
+$DOCK_IMAGE  
 
 
