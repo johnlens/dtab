@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+
+. ./init_params
+
+
+SMBNAME=TESTNAME_once
+var="${SMBNAME}"
+if  [ "${!var}" = 1 ]; then echo stop  ${!var};fi
+exit
+
+
+
+
+
+echo Nm_TEST  - $NM_TEST
+
+abc=TEST
+
+echo abc -  $abc
+
+eval "qqq=NM_${abc}"
+
+
+
+echo qqq 

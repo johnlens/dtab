@@ -6,6 +6,7 @@ WRDIR=`dirname "$AFLNM"`
 DT_LOCATION=$WRDIR
 
 . $WRDIR/init_params
+if [ "$USER" = "" ]; then echo i need Username;exit; fi
 
 
 docker run -d \

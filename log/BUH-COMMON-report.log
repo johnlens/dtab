@@ -1,0 +1,22 @@
+Thu Sep 23 09:31:24 UTC 2021
+Initializing cache transaction: Reading configInitializing cache transaction: Reading chunksInitializing cache transaction: Reading filesCompacting segments   0%Compacting segments  50%Saving files cacheSaving chunks cacheSaving cache config                                                                                ------------------------------------------------------------------------------
+Archive name: BUH-COMMON-2021-09-23_09:31:24
+Archive fingerprint: 385c2e25c9cfaeeffcd8e6468352acaa63ab083a7d4ee5dd69f9665316d1aa19
+Time (start): Thu, 2021-09-23 09:31:24
+Time (end):   Thu, 2021-09-23 09:31:24
+Duration: 0.00 seconds
+Number of files: 0
+Utilization of max. archive size: 0%
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+This archive:                  580 B                521 B                521 B
+All archives:                2.32 kB              2.09 kB              2.09 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       4                    4
+------------------------------------------------------------------------------
+Keeping archive: BUH-COMMON-2021-09-23_09:31:24       Thu, 2021-09-23 09:31:24 [385c2e25c9cfaeeffcd8e6468352acaa63ab083a7d4ee5dd69f9665316d1aa19]
+Keeping archive: BUH-COMMON-2021-09-23_09:31:22       Thu, 2021-09-23 09:31:22 [32013a2fa0f12c2e8420fc83b070402f2d62f3e006a6aee311e750c955c81dfc]
+Keeping archive: BUH-COMMON-2021-09-23_09:31:19       Thu, 2021-09-23 09:31:19 [cb69b666e6776fbeabc06b1e8865df8427f4274fcea48b82fb24bf74cea174bd]
+Keeping archive: BUH-COMMON-2021-09-23_09:31:16       Thu, 2021-09-23 09:31:16 [89ed3cdc44835e73b8df973cd3293c603a206affd8c5c5b993cd22a74a73d0aa]
+
