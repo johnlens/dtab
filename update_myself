@@ -4,6 +4,9 @@ SAVEDIR=$PWD
 AFLNM=`readlink -e "$0"`
 WRDIR=`dirname "$AFLNM"`
 cd $WRDIR
+git config --global user.name $HOSTNAME
+git config --global user.email dtab@HOSTNAME
+
 
 . ./init_params
 
