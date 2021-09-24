@@ -18,5 +18,6 @@ docker run -d \
 $PRM_SGN \
 --cap-add SYS_ADMIN \
 --cap-add DAC_READ_SEARCH \
+--privileged \
 $DOCK_IMAGE /dt-auto-backup/dt-bckp-ip $1
 
