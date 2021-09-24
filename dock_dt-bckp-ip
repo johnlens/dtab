@@ -6,7 +6,10 @@ WRDIR=`dirname "$AFLNM"`
 DT_LOCATION=$WRDIR
 
 . $WRDIR/init_params
+$WRDIR/clean_dt_auto_backup
+
 if [ "$USER" = "" ]; then echo i need Username;exit; fi
+
 
 
 docker run -d \
@@ -19,5 +22,6 @@ $PRM_SGN \
 --cap-add SYS_ADMIN \
 --cap-add DAC_READ_SEARCH \
 --privileged \
+--name $1
 $DOCK_IMAGE /dt-auto-backup/dt-bckp-ip $1
 
