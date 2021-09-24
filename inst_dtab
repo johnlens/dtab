@@ -18,6 +18,7 @@ echo BASE=dt-auto-backup>>$CONFFILE
 echo DOCK_IMAGE=dtcentos/smbenv:solid>>$CONFFILE
 echo BACKUPDIR=>>$CONFFILE
 echo DELAY=1>>$CONFFILE
+echo RESET_PERIOD=day>>$CONFFILE
 echo >>$CONFFILE
 fi 
 

@@ -19,7 +19,7 @@ do
 
  if  ! [ "$COMP" = "NO-NAME-COMP-QWERTY" ]; then
         echo We start $COMP
-	./dock_dt-bckp-ip $COMP
+	./dock_dt-bckp-ip $COMP run/$comp_dock.run
  fi
 
 done
