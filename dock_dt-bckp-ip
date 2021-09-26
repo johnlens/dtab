@@ -22,5 +22,6 @@ $PRM_SGN \
 --cap-add DAC_READ_SEARCH \
 --privileged \
 --name $1-$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM \
+--rm \
 $DOCK_IMAGE /dt-auto-backup/dt-bckp-ip $1
 

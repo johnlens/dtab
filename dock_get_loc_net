@@ -14,5 +14,6 @@ docker run  \
 -v $DT_LOCATION/reports:/dt-auto-backup/reports \
 $PRM_SGN \
 --net=host \
+--rm \
 $DOCK_IMAGE /dt-auto-backup/get_loc_net
 
