@@ -21,12 +21,12 @@ docker pull $DOCK_IMAGE
 
 
 rm -f /etc/cron.hourly/$BASE'_'start_dt_auto
-test -e /etc/cron.hourly/&&ln -s  $WRDIR/start_dt_auto /etc/cron.hourly/$BASE'_'start_dt_auto
+test -e /etc/cron.hourly/&&ln -s  start_dt_auto /etc/cron.hourly/$BASE'_'start_dt_auto
 
 
 UPDATE_MYSELF=update_myself
 rm -f /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
-test -e /etc/cron.daily/&&ln -s  $WRDIR/$UPDATE_MYSELF /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
+test -e /etc/cron.daily/&&ln -s  $UPDATE_MYSELF /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
 
 
 cd $SAVEDIR
