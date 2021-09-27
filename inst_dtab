@@ -30,12 +30,12 @@ cp exc-dt etc/exc-dt
 
 docker  pull $DOCK_IMAGE
 
-test -e /etc/cron.hourly/$BASE'_'start_dt_auto&&rm -f /etc/cron.hourly/$BASE'_'start_dt_auto
+rm -f /etc/cron.hourly/$BASE'_'start_dt_auto
 test -e /etc/cron.hourly/&&ln -s  $WRDIR/start_dt_auto /etc/cron.hourly/$BASE'_'start_dt_auto
 
 
 UPDATE_MYSELF=update_myself
-test -e /etc/cron.daily/$BASE'_'$UPDATE_MYSELF&&rm -f /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
+rm -f /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
 test -e /etc/cron.daily/&&ln -s  $WRDIR/$UPDATE_MYSELF /etc/cron.daily/$BASE'_'$UPDATE_MYSELF
 
 
