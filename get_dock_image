@@ -11,7 +11,7 @@ cd $WRDIR
 
 docker pull $DOCK_IMAGE&&exit
 
-cd /dock_file
+cd dock_file
 docker build . -t $DOCK_IMAGE
 cd $SAVEDIR
  
