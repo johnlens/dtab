@@ -28,7 +28,7 @@ cp exc-dt etc/exc-dt
 
 . $WRDIR/init_params
 
-docker  pull $DOCK_IMAGE
+./get_dock_image
 
 rm -f /etc/cron.hourly/$BASE'_'start_dt_auto
 test -e /etc/cron.hourly/&&ln -s  $WRDIR/start_dt_auto /etc/cron.hourly/$BASE'_'start_dt_auto

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+SAVEDIR=$PWD
+AFLNM=`readlink -e "$0"`
+WRDIR=`dirname "$AFLNM"`
+
+cd $WRDIR
+
+. $WRDIR/init_params
+
+docker pull $DOCK_IMAGE&&exit
+
+cd /dock_file
+docker build . -t $DOCK_IMAGE
+cd $SAVEDIR
+ 
