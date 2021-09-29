@@ -12,7 +12,7 @@ docker run  \
 -v $DT_LOCATION/run:/dt-auto-backup/run \
 -v $DT_LOCATION/log:/dt-auto-backup/log \
 -v $DT_LOCATION/reports:/dt-auto-backup/reports \
--v /etc/localtime:/etc/localtime
+-v /etc/localtime:/etc/localtime \
 $PRM_SGN \
 --net=host \
 --rm \
