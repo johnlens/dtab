@@ -3,7 +3,7 @@
 AFLNM=`readlink -e "$0"`
 WRDIR=`dirname "$AFLNM"`
 DT_LOCATION=$WRDIR
-
+  
 . $WRDIR/init_params
 
 
