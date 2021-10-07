@@ -10,7 +10,7 @@ DT_LOCATION=$WRDIR
 if [ "$USER" = "" ]; then echo i need Username;exit; fi
 
 
-
+nice -20 \
 docker run -d \
 -v $DT_LOCATION/etc/dt-auto-backup.conf:/dt-auto-backup/etc/dt-auto-backup.conf \
 -v $BACKUPDIR:/dt-auto-backup/backup \
