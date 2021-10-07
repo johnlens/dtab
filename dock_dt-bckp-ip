@@ -10,7 +10,6 @@ DT_LOCATION=$WRDIR
 if [ "$USER" = "" ]; then echo i need Username;exit; fi
 
 
-nice -20 \
 docker run -d \
 -v $DT_LOCATION/etc/dt-auto-backup.conf:/dt-auto-backup/etc/dt-auto-backup.conf \
 -v $BACKUPDIR:/dt-auto-backup/backup \
@@ -21,6 +20,7 @@ docker run -d \
 $PRM_SGN \
 --cap-add SYS_ADMIN \
 --cap-add DAC_READ_SEARCH \
+--cap-add=SYS_NICE \
 --privileged \
 --name $1-dtab \
 --rm \
