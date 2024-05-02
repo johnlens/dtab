@@ -39,6 +39,9 @@ R /
 + **/*.jp*
 + **/*.JP*
 
++ **/*.*sql*
++ **/*.*SQL*
+
 
 # don't backup the other
 - *
