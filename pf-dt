@@ -41,7 +41,8 @@ R /
 
 + **/*.*sql*
 + **/*.*SQL*
-
++ **/*.*bak*
++ **/*.*BAK*
 
 # don't backup the other
 - *
