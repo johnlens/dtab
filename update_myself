@@ -11,7 +11,7 @@ git config --global user.email dtab@HOSTNAME
 . ./init_params
 
 
-git stash
+#git stash
 git pull https://github.com/johnlens/dtab.git
 chmod +x update_myself
 rm -f pf-dt
