@@ -1,7 +1,7 @@
 # "sh:" pattern style is the default, so the following line is not needed:
 P sh
 R /
-
+#test string
 - **/?$/Windows/**/*
 - **/?$/window/**/*
 - **/?$/WINDOWS/**/*
