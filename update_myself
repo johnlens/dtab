@@ -10,6 +10,7 @@ git config --global user.email dtab@HOSTNAME
 
 . ./init_params
 
+mkdir -p cache
 
 #git stash
 git pull https://github.com/johnlens/dtab.git

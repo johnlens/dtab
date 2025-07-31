@@ -13,6 +13,7 @@ docker run -ti \
 -v $DT_LOCATION/run:/dt-auto-backup/run \
 -v $DT_LOCATION/log:/dt-auto-backup/log \
 -v $DT_LOCATION/reports:/dt-auto-backup/reports \
+-v $DT_LOCATION/cache:/root/.cache/borg/ \
 -v /etc/localtime:/etc/localtime \
 --cap-add SYS_ADMIN \
 --cap-add DAC_READ_SEARCH \
