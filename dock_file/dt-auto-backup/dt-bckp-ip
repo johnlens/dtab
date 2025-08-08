@@ -1,0 +1,144 @@
+#!/bin/bash
+
+#Ver 0.99
+
+MASTER_ADDR=vvpn.dt-com.ru
+MASTER_NAME=master-backup
+
+COMP=$1
+USER=$2
+PASS=$3
+DOMAIN=$4
+
+cd `echo $BASH_SOURCE|sed 's/\/dt-bckp-ip//'`
+
+init_conf=`cat init.conf`
+for PARAM in `cat $init_conf `
+do
+  declare `echo $PARAM| awk -F "=" '{print $1}'`=`echo $PARAM| awk -F "=" '{print $2}'`
+done
+
+
+if  [ "$COMP" =  "" ]; then echo Need Comp Name; exit; fi
+
+
+SMBNAME=`$PWD/ip2name $COMP`
+
+
+
+if  [ "$SMBNAME" =  "NO-NAME-COMP-QWERTY" ]
+then
+echo NO comps
+exit
+fi
+
+SHREXIST=`$PWD/get_shares $COMP $USER $PASS $DOMAIN`
+if  [ "$SHREXIST" =  "" ]; then echo No Shares on $SMBNAME; exit; fi
+
+
+
+#testing if lock exist
+RST_PRD_DATE=`date +%Y-%m-%d`
+[ "$RESET_PERIOD" = "week" ]&&RST_PRD_DATE=`date +%Y-%m-%W`
+
+if  test -f run/$SMBNAME-$RST_PRD_DATE.lock
+then
+echo "it\'s lock for Now"
+exit
+fi
+
+
+#delaying start
+[ "$DELAY" = "" ]&&DELAY=0
+
+let "P = $RANDOM"
+let "P = P * $DELAY "
+let "P = P /650 "
+let "P = P * 60 "
+let "M = P /60"
+
+
+#deleteing unactual lock
+rm run/$SMBNAME-*.lock -f
+
+
+#creting new lock
+RST_PRD_DATE=`date +%Y-%m-%d`
+[ "$RESET_PERIOD" = "week" ]&&RST_PRD_DATE=`date +%Y-%m-%W`
+echo $COMP > run/$SMBNAME-$RST_PRD_DATE.lock
+
+
+echo We wil start in $M minutes
+sleep $P
+
+
+. $PWD/init_dir
+
+echo report_dir:  $REPORT_DIR
+
+
+COMP_DIR=$MNT_DIR/$SMBNAME
+test -e $COMP_DIR||mkdir $COMP_DIR
+
+WORK_DIR_CMP=$BASE_B_DIR/$SMBNAME
+
+
+test -e run/$SMBNAME.SHARE&&rm -f run/$SMBNAME.SHARE
+
+
+$PWD/dt_mount $COMP $SHARE
+
+
+for SHARE in $(cat run/$SMBNAME.SHARE)
+do
+
+  if  [ "$SHARE" =  "" ]
+  then
+   echo no shares
+   exit
+  fi
+
+
+  echo y | borg init -e none $WORK_DIR_CMP
+ REP_LOG=log/`./ip2name $COMP`-report.log
+
+
+ date 1>$REP_LOG
+echo y|borg break-lock $WORK_DIR_CMP 
+
+SAVE_DIR=$PWD
+cd $COMP_DIR
+echo $COMP_DIR
+
+
+
+echo y|  nice -20 borg create --list --stats  --exclude-from=../../exc-dt  --patterns-from=../../pf-dt --files-cache=mtime,size  \
+  $WORK_DIR_CMP::"$SMBNAME-{now:%Y-%m-%d_%H:%M:%S}" $COMP_DIR 2>&1|tee ../../$REP_LOG
+
+cd $SAVE_DIR
+
+
+  nice -20 borg prune -v --list --progress --keep-daily=7 --keep-within=3d  --keep-weekly=4 --keep-monthly=5 $WORK_DIR_CMP &>>$REP_LOG
+
+  echo Created on `date +%Y-%m-%d\ %T`>$REPORT_DIR/$SMBNAME.report
+  nice -20 borg check $WORK_DIR_CMP>>$REPORT_DIR/$SMBNAME.report
+  nice -20 borg info  $WORK_DIR_CMP>>$REPORT_DIR/$SMBNAME.report
+  echo >>$REPORT_DIR/$SMBNAME.report
+  echo ---------------------------------------------------------------------------------- >>$REPORT_DIR/$SMBNAME.report
+  nice -20 borg list  $WORK_DIR_CMP>>$REPORT_DIR/$SMBNAME.report
+
+    done
+
+ssh $MASTER_NAME@$MASTER_ADDR mkdir report
+ssh $MASTER_NAME@$MASTER_ADDR mkdir report/$HOSTNAME
+scp $REPORT_DIR/$SMBNAME.report "$MASTER_NAME@$MASTER_ADDR:report/$HOSTNAME"
+
+
+
+$PWD/dt_umount $COMP
+
+[ -e run/$SMBNAME.SHARE ]&&rm -f run/$SMBNAME.SHARE
+
+#once a day
+[ ! "$ONCEINPERIOD" = "1" ]&& rm run/$SMBNAME-*.lock -f
+

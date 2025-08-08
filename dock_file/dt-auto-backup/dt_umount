@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+COMP=$1
+SHARE=$2
+USER=$3
+PASS=$4
+DOMAIN=$5
+
+echo Start: dt_umount
+
+init_conf=`cat init.conf`
+for PARAM in `cat $init_conf `
+do
+  declare `echo $PARAM| awk -F "=" '{print $1}'`=`echo $PARAM| awk -F "=" '{print $2}'`
+done
+
+
+SMBNAME=`$PWD/ip2name $COMP`
+
+
+for SHARE in $(cat run/$SMBNAME.SHARE)
+do
+#umount  -f  $SHARE 1>>log/`./ip2name $COMP`-umont.log  2>>log/`./ip2name $COMP`-umont.err
+umount  -f  $SHARE
+done
+
+echo Finish: dt_umount

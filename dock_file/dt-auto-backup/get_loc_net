@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+SAVEDIR=$PWD
+
+cd `echo $BASH_SOURCE|sed 's/\/get_loc_net//'`
+
+init_conf=`cat init.conf`
+for PARAM in `cat $init_conf `
+ do
+  declare `echo $PARAM| awk -F "=" '{print $1}'`=`echo $PARAM| awk -F "=" '{print $2}'`
+ done
+
+
+
+for name in $(nmap -sn -n `ip a|grep -v "scope global tap" |grep -v "127.0.0."|grep  "inet " | awk '{ print $2}'|grep  -E  "192\.168\.|10\."`|grep "scan report for"|sed 's/Nmap scan report for //')
+do
+echo $name
+done
+
+if [ ! "$NET" = "" ]; then
+
+for name in $(nmap -sn -n $NET|grep "scan report for"|sed 's/Nmap scan report for //')
+do
+echo $name
+done
+fi
+
+cd $SAVEDIR

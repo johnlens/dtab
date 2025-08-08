@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MNT_DIR=$PWD/mnt
+test -e $MNT_DIR||mkdir $MNT_DIR
+
+BASE_B_DIR=$PWD/backup
+test -e $BASE_B_DIR||mkdir $BASE_B_DIR
+
+REPORT_DIR=$PWD/reports
+test -e $REPORT_DIR||mkdir $REPORT_DIR

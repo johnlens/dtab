@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# GET PARAMS
+
+cd `echo $BASH_SOURCE|sed 's/\/dt-bckp//'`
+
+
+
+init_conf=`cat init.conf`
+for PARAM in `cat $init_conf `
+ do
+  declare `echo $PARAM| awk -F "=" '{print $1}'`=`echo $PARAM| awk -F "=" '{print $2}'`
+ done
+
+
+test -e log||mkdir log
+test -e run||mkdir run
+
+# Get ips
+
+
+for COMP in $($PWD/get_loc_net)
+do
+
+ if  ! [ "$COMP" = "NO-NAME-COMP-QWERTY" ]; then
+
+
+    if   grep -q "$COMP" no-comp.lst ; then
+         echo "$COMP - не обрабатываем" &>>log/`./ip2name $COMP`.log&
+    else
+
+        echo Start starting : `date` >>log/`./ip2name $COMP`.log
+        echo We start $COMP
+echo        $PWD/dt-bckp-ip $COMP $USER $PASS $DOMAIN &>>log/`./ip2name $COMP`.log&
+    fi
+
+ fi
+done
+

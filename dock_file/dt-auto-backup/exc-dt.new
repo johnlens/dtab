@@ -1,0 +1,13 @@
+**/?$/Windows/**/*
+**/?$/windows/**/*
+**/?$/WINDOWS/**/*
+**/?$/Windows.old/**/*
+**/?$/windows.old/**/*
+**/?$/WINDOWS.*/**/*
+**/?$/?Recycle.Bin/**/*
+**/?$/?RECYCLE.BIN/**/*
+**/?$/RECYCLER/**/*
+**/?$/ProgramData/**/*
+**/?$/Users/*/AppData/**/*
+**/?$/Recovery*/**/*
+

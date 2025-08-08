@@ -1,0 +1,62 @@
+#!/bin/bash
+
+
+COMP=$1
+USER=$3
+PASS=$4
+DOMAIN=$5
+
+echo   Start: dt_mount
+
+
+init_conf=`cat init.conf`
+for PARAM in `cat $init_conf `
+do
+   declare `echo $PARAM| awk -F "=" '{print $1}'`=`echo $PARAM| awk -F "=" '{print $2}'`
+done
+
+SMBNAME=`$PWD/ip2name $COMP`
+
+. $PWD/init_dir
+
+MNT_DIR=$PWD/mnt
+test -e $MNT_DIR||mkdir $MNT_DIR
+
+BASE_B_DIR=$PWD/backup
+test -e $BASE_B_DIR||mkdir $BASE_B_DIR
+
+COMP_DIR=$MNT_DIR/$SMBNAME
+test -e $COMP_DIR||mkdir $COMP_DIR
+
+rm -f run/$SMBNAME.SHARE
+
+
+for SHARE in $($PWD/get_shares $COMP $USER $PASS $DOMAIN)
+do
+
+SMB_SRC="//$COMP/$SHARE"
+SHARE_DIR="$COMP_DIR/$SHARE"
+
+echo $SHARE_DIR>>run/$SMBNAME.SHARE
+
+
+
+test -e $SHARE_DIR||mkdir $SHARE_DIR
+
+#umount  -f  $SHARE_DIR  1>>log/`./ip2name $COMP`-umont-start.log  2>>log/`./ip2name $COMP`-umont-start.err
+
+umount  -f  $SHARE_DIR  
+
+add_param=ro
+
+mount.cifs  $SMB_SRC $SHARE_DIR  -o user=$USER,domain=$DOMAIN,pass=$PASS,$add_param ||\
+mount.cifs  $SMB_SRC $SHARE_DIR  -o user=$USER,domain=$DOMAIN,pass=$PASS,$add_param,vers=2.1 ||\
+mount.cifs  $SMB_SRC $SHARE_DIR  -o user=$USER,pass=$PASS,$add_param  ||\
+mount.cifs  $SMB_SRC $SHARE_DIR  -o user=$USER,pass=$PASS,$add_parm,vers=2.12 ||\
+mount.cifs  $SMB_SRC $SHARE_DIR  -o user=$USER,pass=$PASS,$add_parm,vers=1.0  
+
+done
+
+echo   Finish: dt_mount
+
+

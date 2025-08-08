@@ -1,0 +1,141 @@
+#!/bin/bash
+COMP=$1
+#USER=$2
+#PASS=$3
+#DOMAIN=$4
+
+
+init_conf=`cat init.conf`
+for PARAM in `cat $init_conf `
+do
+   declare `echo $PARAM| awk -F "=" '{print $1}'`=`echo $PARAM| awk -F "=" '{print $2}'`
+done
+
+
+
+if [ "$COMP" =  "" ]
+then
+echo  I need comp\'s name
+exit
+fi
+
+if [ "$USER" =  "" ]; then
+echo  I need user name
+exit
+fi
+
+if [ "$PASS" =  "" ]
+then
+echo  I need pass
+exit
+fi
+
+SHARE_FLAG="no"
+IFS=$'\n'
+
+
+
+#check for  standart open shares C$ etc
+
+VER=`smbclient -V`
+VER=` echo $VER|awk '{print $2}'`
+VER=` echo $VER|awk -F "." '{print $1}'`
+
+
+if [ $VER == "4" ];then
+for STR_SHARE in $(echo -e "$PASS\n"|smbclient  -L \\$COMP -U $USER@$DOMAIN -m SMB2)
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'|grep  "^.[$]"`
+#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+
+
+
+#if not check for other shares
+if  [ "$SHARE_FLAG" =  "no" ]; then
+for STR_SHARE in $(echo -e "$PASS\n"|smbclient  -L \\$COMP -U $USER@$DOMAIN -m SMB2)
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'`
+#|grep  "^.[$]"`#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+fi
+
+
+#the same without domain
+
+
+if  [ "$SHARE_FLAG" =  "no" ]; then
+for STR_SHARE in $(echo -e "$PASS\n"|smbclient  -L \\$COMP -U $USER -m SMB2 )
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'|grep  "^.[$]"`
+#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+fi
+
+
+
+
+if  [ "$SHARE_FLAG" =  "no" ]; then
+for STR_SHARE in $(echo -e "$PASS\m"|smbclient  -L \\$COMP -U $USER -m SMB2 )
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'`
+#|grep  "^.[$]"`#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+fi
+
+else
+#Anonymous for smbclient3
+if  [ "$SHARE_FLAG" =  "no" ]; then
+for STR_SHARE in $(smbclient  -L \\$COMP -N  2>/dev/nul|cat)
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'#|grep  "^.[$]"`
+#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+fi
+
+
+#if not check for other shares
+if  [ "$SHARE_FLAG" =  "no" ]; then
+for STR_SHARE in $(smbclient  -L \\$COMP  -N  2>/dev/nul|cat)
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'`
+#|grep  "^.[$]"`#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+fi
+
+
+#the same without domain
+
+
+if  [ "$SHARE_FLAG" =  "no" ]; then
+for STR_SHARE in $(smbclient  -L \\$COMP  -N   2>/dev/nul|cat )
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'#|grep  "^.[$]"`
+#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+fi
+
+
+if  [ "$SHARE_FLAG" =  "no" ]; then
+for STR_SHARE in $(smbclient  -L \\$COMP  -N   2>/dev/nul|cat )
+do
+SHARE=`echo $STR_SHARE|grep Disk |awk '{print $1}'`
+#|grep  "^.[$]"`#|sed 's/\$$//'`
+if  [ "$SHARE" !=  "" ]; then  echo $SHARE;SHARE_FLAG="yes";fi
+done
+fi
+
+fi
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+IP=$1
+
+if [ "$IP" =  "" ]
+then
+echo NO-NAME-COMP-QWERTY
+exit
+fi
+
+for COMP in $(nmblookup  -A  $IP|grep "<20>"|grep -v " <GROUP>"|awk '{ print $1}')
+do
+echo $COMP
+exit
+done
+
+if [ "$COMP" =  "" ]
+then
+echo NO-NAME-COMP-QWERTY
+exit 2
+fi
+
+
+
+
