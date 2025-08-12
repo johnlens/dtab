@@ -112,8 +112,8 @@ echo $COMP_DIR
 
 
 
-echo y|  nice -20 borg create --list --stats  --exclude-from=../../exc-dt  --patterns-from=../../pf-dt --files-cache=mtime,size  \
-  $WORK_DIR_CMP::"$SMBNAME-{now:%Y-%m-%d_%H:%M:%S}" $COMP_DIR 2>&1|tee ../../$REP_LOG
+echo y|  nice -20 borg create --list --stats  --patterns-from=../../pf-dt --exclude-from=../../exc-dt  --files-cache=mtime,size  \
+  $WORK_DIR_CMP::"$SMBNAME-{now:%Y-%m-%d_%H:%M:%S}" $COMP_DIR 2>&1|grep -v "^x /"|tee ../../$REP_LOG
 
 cd $SAVE_DIR
 

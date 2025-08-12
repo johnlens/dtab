@@ -16,8 +16,8 @@ done
 
 if [ "$COMP" =  "" ]
 then
-echo NO-NAME-COMP-QWERTY
-exit 2
+echo $IP
+#exit 2
 fi
 
 
