@@ -1,0 +1,62 @@
+# "sh:" pattern style is the default, so the following line is not needed:
+P sh
+R /dt-auto-backup/
+
+
+- /dt-auto-backup/backup
+- /dt-auto-backup/**/?$/Windows/**/*
+- /dt-auto-backup/**/?$/window/**/*
+- /dt-auto-backup/**/?$/WINDOWS/**/*
+- /dt-auto-backup/**/?$/Windows.old/**/*
+- /dt-auto-backup/**/?$/windows.old/**/*
+- /dt-auto-backup/**/?$/WINDOWS.*/**/*
+- /dt-auto-backup/**/?$/?Recycle.Bin/**/*
+- /dt-auto-backup/**/?$/?RECYCLE.BIN/**/*
+- /dt-auto-backup/**/?$/RECYCLER/**/*
+- /dt-auto-backup/**/?$/ProgramData/**/*
+- /dt-auto-backup/**/?$/Users/**/AppData/**/*
+- /dt-auto-backup/**/?$/Recovery*/**/*
+- /dt-auto-backup/**/?$/Program Files/**/*
+- /dt-auto-backup/**/Application Data/**/*
+- **/Application Data/**/*
+
+
++ /dt-auto-backup/**/?$/*СБИС*/**
+
+
+#Common Docs
++ /dt-auto-backup/**/*.txt
++ /dt-auto-backup/**/*.doc*
++ /dt-auto-backup/**/*.xls*
++ /dt-auto-backup/**/*.TXT
++ /dt-auto-backup/**/*.DOC*
++ /dt-auto-backup/**/*.XLS*
++ /dt-auto-backup/**/*.cer*
++ /dt-auto-backup/**/*.cmd*
++ /dt-auto-backup/**/*.key*
++ /dt-auto-backup/**/*.pdf
++ /dt-auto-backup/**/*.PDF*
++ /dt-auto-backup/**/*.ods
++ /dt-auto-backup/**/*.ODS*
+
+#1C
++ /dt-auto-backup/**/*.1CD*
++ /dt-auto-backup/**/*.1cd*
++ /dt-auto-backup/**/*.dbf*
++ /dt-auto-backup/**/*.DBF*
+
++ /dt-auto-backup/**/*.jp*
++ /dt-auto-backup/**/*.JP*
+
+#Postgress
++ /dt-auto-backup/**/*.*sql*
++ /dt-auto-backup/**/*.*SQL*
+
+#MsSQL
++ /dt-auto-backup/**/*.*bak*
++ /dt-auto-backup/**/*.*BAK*
+
+
+
+# don't backup the other
+- *
